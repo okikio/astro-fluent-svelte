@@ -1,8 +1,10 @@
 <script>
-    import { Button, TextBlock } from "fluent-svelte";
+    import { Button, TextBlock, Checkbox, ToggleSwitch, RadioButton, TextBox, TextBoxButton, Slider } from "fluent-svelte";
     import "fluent-svelte/theme.css";
 
+	let checked = false;
     let count = 0;
+	let group = 1;
 </script>
 
 <TextBlock variant="display">{count}.</TextBlock>
@@ -11,10 +13,59 @@
     <Button on:click={() => count--}>Decrease Counter</Button>
     <Button variant="hyperlink" on:click={() => count = 0}>Reset Counter</Button>
 </div>
+<div>
+    <Checkbox bind:checked />
+    Current state: {checked ? "checked" : "unchecked"}
+</div>
+<div>
+    <ToggleSwitch bind:checked />
+    Current state: {checked ? "checked" : "unchecked"}
+</div>
+<div>
+	<RadioButton value={1} bind:group>Option 1</RadioButton>
+	<RadioButton value={2} bind:group>Option 2</RadioButton>
+	<RadioButton value={3} bind:group disabled>Option 3</RadioButton>
+</div>
+<!-- <div>
+	<RadioButton checked>RadioButton</RadioButton>
+	<RadioButton disabled>RadioButton</RadioButton>
+	<RadioButton disabled checked>RadioButton</RadioButton>
+</div> -->
+
+<div>
+    <TextBox placeholder="TextBox" />
+    <TextBox placeholder="TextBox" disabled />
+    <TextBox type="search" placeholder="TextBox" />
+    <TextBox type="search" placeholder="TextBox" disabled />
+    <TextBox type="password" placeholder="TextBox" />
+    <TextBox type="password" placeholder="TextBox" disabled />
+</div>
+<TextBox placeholder="Custom buttons!">
+    <TextBoxButton slot="buttons" on:click={() => alert("Clicked!")}>
+      <!-- https://github.com/microsoft/fluentui-system-icons -->
+      <svg slot="icon" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7.85355 0.146447C7.65829 -0.0488155 7.34171 -0.0488155 7.14645 0.146447C6.95118 0.341709 6.95118 0.658291 7.14645 0.853553L8.29603 2.00314C4.80056 2.11088 2 4.97839 2 8.5C2 12.0899 4.91015 15 8.5 15C12.0899 15 15 12.0899 15 8.5C15 8.48656 15 8.47313 14.9999 8.45971C14.9983 8.2001 14.7805 8 14.5209 8H14.4782C14.2093 8 14 8.23107 14 8.5C14 11.5376 11.5376 14 8.5 14C5.46243 14 3 11.5376 3 8.5C3 5.53311 5.34917 3.11491 8.28892 3.00398L7.14645 4.14645C6.95118 4.34171 6.95118 4.65829 7.14645 4.85355C7.34171 5.04882 7.65829 5.04882 7.85355 4.85355L9.85355 2.85355C10.0488 2.65829 10.0488 2.34171 9.85355 2.14645L7.85355 0.146447ZM11.8536 6.14645C12.0488 6.34171 12.0488 6.65829 11.8536 6.85355L8.85355 9.85355C8.65829 10.0488 8.34171 10.0488 8.14645 9.85355L6.64645 8.35355C6.45118 8.15829 6.45118 7.84171 6.64645 7.64645C6.84171 7.45118 7.15829 7.45118 7.35355 7.64645L8.5 8.79289L11.1464 6.14645C11.3417 5.95118 11.6583 5.95118 11.8536 6.14645Z" fill="currentColor" />
+      </svg>
+    </TextBoxButton>
+</TextBox>
+<div>
+    <Slider />
+    <Slider value={10000} step={10000} max={30000} ticks={[10000, 20000]} suffix="cm" />
+    <Slider value={80} max={200} reverse />
+    <Slider value={50} disabled />
+</div>
+
+<div style="display: flex; block-size: 72px;">
+		<Slider orientation="vertical" value={24} />
+    <Slider orientation="vertical" value={50} reverse />
+    <Slider orientation="vertical" value={76} track={false} ticks={[24, 50, 76]} tickPlacement="after" />
+    <Slider orientation="vertical" value={24} disabled />
+</div>
 
 <style>
 	:global(body) {
 		background-color: var(--fds-solid-background-base);
 		color: var(--fds-text-primary);
+        padding: 1em;
 	}
 </style>
