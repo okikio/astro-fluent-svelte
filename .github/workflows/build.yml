@@ -41,6 +41,11 @@ jobs:
 
       - name: Build
         run: pnpm build
+        
+      - name: Add dist/ to files to commit
+        if: ${{ github.ref == 'refs/heads/master' }}
+        run: |
+          git add --force dist/
 
       - name: Commit files
         if: ${{ github.ref == 'refs/heads/master' }}
@@ -55,3 +60,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
+          
