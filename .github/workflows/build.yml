@@ -46,6 +46,7 @@ jobs:
         if: ${{ github.ref == 'refs/heads/master' }}
         run: |
           git add --force dist/
+          git add --force docs/
 
       - name: Commit files
         if: ${{ github.ref == 'refs/heads/master' }}
